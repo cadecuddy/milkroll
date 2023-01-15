@@ -16,15 +16,12 @@ const { frontmatter } = Astro.props;
   </head>
   <PostMenu />
   <body>
-    <main>
-      <article class="md:max-w-3xl mx-auto max-w-sm">
+    <main class="">
+      <article class="md:max-w-3xl md:mx-auto max-w-sm mx-4 md:my-0 my-4">
         <h1 class="text-3xl md:text-5xl mb-4 md:leading-tight font-thin">
           {frontmatter.title}
         </h1>
-        <img
-          src={frontmatter.image}
-          class="max-w-sm mx-auto md:max-w-3xl md:w-full mb-6"
-        />
+        <img src={frontmatter.image} class="md:w-full mb-6" />
         <time datetime={frontmatter.pubDate} class="text-neutral-500 font-mono">
           Published:
           {
@@ -34,11 +31,11 @@ const { frontmatter } = Astro.props;
               day: "numeric",
             })
           }
-          <span class="text-neutral-500 font-mono float-right">
-            {frontmatter.minutesRead}
+          <span class="float-right">
+            {frontmatter.minutesRead} 📚
           </span>
         </time>
-        <p class="text-neutral-500 text-md">
+        <p class="text-neutral-500 text-base">
           <div class="flex space-x-3">
             {
               frontmatter.tags.map((tag: any) => (
@@ -57,7 +54,7 @@ const { frontmatter } = Astro.props;
       <br />
 
       <article
-        class="prose lg:prose-lg dark:prose-dark md:max-w-3xl mx-auto max-w-sm"
+        class="prose lg:prose-lg dark:prose-dark md:max-w-3xl md:mx-auto mx-4 md:my-0 my-4"
       >
         <slot />
       </article>
