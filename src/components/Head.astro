@@ -5,7 +5,11 @@ export interface Props {
   image?: string;
 }
 
-const { title, description, image = "images/lain.png" } = Astro.props;
+const {
+  title,
+  description,
+  image = new URL("/images/lain.png", Astro.site),
+} = Astro.props;
 ---
 
 <!-- HTML Meta Tags -->
