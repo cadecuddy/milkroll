@@ -1,0 +1,24 @@
+---
+import Head from "../components/Head.astro";
+import Footer from "../components/Footer.astro";
+import Menu from "../components/Menu.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <Head title={title} description={description} />
+  </head>
+  <body class="mx-auto">
+    <Menu />
+    <slot />
+    <Footer />
+  </body>
+</html>

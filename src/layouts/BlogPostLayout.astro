@@ -1,0 +1,68 @@
+---
+import Footer from "../components/Footer.astro";
+import Head from "../components/Head.astro";
+import PostMenu from "../components/PostMenu.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <Head
+      title={frontmatter.title + " | milk roll"}
+      description={frontmatter.description}
+    />
+  </head>
+  <PostMenu />
+  <body>
+    <main>
+      <article class="md:max-w-3xl mx-auto max-w-sm">
+        <h1 class="text-3xl md:text-5xl mb-4 md:leading-tight font-thin">
+          {frontmatter.title}
+        </h1>
+        <img
+          src={frontmatter.image}
+          class="max-w-sm mx-auto md:max-w-3xl md:w-full mb-6"
+        />
+        <time datetime={frontmatter.pubDate} class="text-neutral-500 font-mono">
+          Published:
+          {
+            new Date(frontmatter.pubDate).toLocaleDateString("en-us", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })
+          }
+          <span class="text-neutral-500 font-mono float-right">
+            {frontmatter.minutesRead}
+          </span>
+        </time>
+        <p class="text-neutral-500 text-md">
+          <div class="flex space-x-3">
+            {
+              frontmatter.tags.map((tag: any) => (
+                <a
+                  href={`/tags/${tag}`}
+                  class="text-black font-mono font-bold hover:decoration-emerald-500 hover:underline"
+                >
+                  <p>#{tag}</p>
+                </a>
+              ))
+            }
+          </div>
+        </p>
+      </article>
+
+      <br />
+
+      <article
+        class="prose lg:prose-lg dark:prose-dark md:max-w-3xl mx-auto max-w-sm"
+      >
+        <slot />
+      </article>
+
+      <Footer />
+    </main>
+  </body>
+</html>

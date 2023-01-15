@@ -1,0 +1,63 @@
+---
+import BlogCard from "../../components/BlogCard.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const allPosts = await Astro.glob("../*.mdx");
+
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.frontmatter.tags?.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<Layout title={`milk roll | #${tag}`} description={`Posts tagged with ${tag}`}>
+  <main>
+    <div class="text-center">
+      <h1 class="text-2xl font-thin mb-4">
+        Posts tagged with <span class="font-bold text-emerald-500">#{tag}</span>
+      </h1>
+      <h2 class="mb-8">
+        <a href="/posts" class="text-emerald-500 hover:text-emerald-600">
+          &larr; All posts
+        </a>
+      </h2>
+    </div>
+    <div class="flex flex-col justify-center items-center space-y-6">
+      {
+        posts.map(
+          (post: {
+            frontmatter: {
+              minutesRead: any;
+              title: any;
+              description: any;
+              pubDate: any;
+            };
+            url: any;
+          }) => (
+            <BlogCard
+              title={post.frontmatter.title}
+              description={post.frontmatter.description}
+              pubDate={post.frontmatter.pubDate}
+              readTime={post.frontmatter.minutesRead}
+              link={post.url}
+            />
+          )
+        )
+      }
+    </div>
+  </main>
+</Layout>

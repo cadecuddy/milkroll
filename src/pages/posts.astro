@@ -1,0 +1,60 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BlogCard from "../components/BlogCard.astro";
+
+const blogPosts = (await Astro.glob("./*.{md,mdx}"))
+  .filter((post) => !post.frontmatter.draft)
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.pubDate).valueOf() -
+      new Date(a.frontmatter.pubDate).valueOf()
+  );
+
+// alphabetical tags
+
+const tags = [
+  ...new Set(blogPosts.map((post) => post.frontmatter.tags).flat()),
+].sort();
+---
+
+<Layout
+  title="milk roll | all posts"
+  description="milk roll is a blog by cade cuddy. It's about software, adventure, and life."
+>
+  <main>
+    <div
+      class="flex justify-center text-md md:text-lg items-center mt-4 space-x-3 font-mono font-bold mx-auto mb-7 max-w-sm md:max-w-lg"
+    >
+      <div
+        class="text-center space-x-2 flex-wrap flex items-center justify-center"
+      >
+        {
+          tags.map((tag) => {
+            return (
+              <a
+                href={`/tags/${tag}`}
+                class="underline hover:decoration-emerald-500 text-center"
+              >
+                <p>#{tag}</p>
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col justify-center items-center space-y-6">
+      {
+        blogPosts.map((post) => (
+          <BlogCard
+            title={post.frontmatter.title}
+            description={post.frontmatter.description}
+            pubDate={post.frontmatter.pubDate}
+            readTime={post.frontmatter.minutesRead}
+            link={post.url}
+          />
+        ))
+      }
+    </div>
+  </main>
+</Layout>
