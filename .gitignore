@@ -4,6 +4,7 @@ dist/
 
 # dependencies
 node_modules/
+src/pages/template.mdx
 
 # logs
 npm-debug.log*
