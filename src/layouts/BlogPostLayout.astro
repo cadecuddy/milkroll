@@ -21,7 +21,12 @@ const { frontmatter } = Astro.props;
         <h1 class="text-3xl md:text-5xl mb-4 md:leading-tight font-thin">
           {frontmatter.title}
         </h1>
-        <img src={frontmatter.image} class="md:w-full mb-6" />
+        <img
+          src={frontmatter.image}
+          height={400}
+          width={800}
+          alt="Post Image"
+        />
         <time datetime={frontmatter.pubDate} class="text-neutral-500 font-mono">
           Published:
           {
