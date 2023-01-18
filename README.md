@@ -1,6 +1,7 @@
 # milk roll 🥛
 
-## my super-fast astro blog
+### 🚀 my super-fast astro blog
+![lighthouse stats](https://milkroll-images.s3.us-east-2.amazonaws.com/lighthouse.png)
 
 ## 📚 Stack
 
