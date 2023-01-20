@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import BlogCard from "../components/BlogCard.astro";
 
+// get all blog posts, filter out drafts, and sort by pubDate
 const blogPosts = (await Astro.glob("./*.{md,mdx}"))
   .filter((post) => !post.frontmatter.draft)
   .sort(
@@ -10,11 +11,18 @@ const blogPosts = (await Astro.glob("./*.{md,mdx}"))
       new Date(a.frontmatter.pubDate).valueOf()
   );
 
-// alphabetical tags
-
-const tags = [
-  ...new Set(blogPosts.map((post) => post.frontmatter.tags).flat()),
-].sort();
+// alphabetical tags with the count of posts with that tag
+const tagCounts = blogPosts
+  .map((post) => post.frontmatter.tags)
+  .flat()
+  .reduce((acc, tag) => {
+    if (acc[tag]) {
+      acc[tag] += 1;
+    } else {
+      acc[tag] = 1;
+    }
+    return acc;
+  }, {});
 ---
 
 <Layout
@@ -25,20 +33,18 @@ const tags = [
     <div
       class="flex justify-center text-md md:text-lg items-center mt-4 space-x-3 font-mono font-bold mx-auto mb-7 max-w-sm md:max-w-lg"
     >
-      <div
-        class="text-center space-x-2 flex-wrap flex items-center justify-center"
-      >
+      <div class="grid grid-cols-3 gap-4 text-center">
         {
-          tags.map((tag) => {
-            return (
+          tagCounts &&
+            Object.keys(tagCounts).map((tag) => (
               <a
                 href={`/tags/${tag}`}
-                class="underline hover:decoration-emerald-500 text-center"
+                class="hover:underline decoration-emerald-500
+              "
               >
-                <p>#{tag}</p>
+                #{tag}({tagCounts[tag]})
               </a>
-            );
-          })
+            ))
         }
       </div>
     </div>
