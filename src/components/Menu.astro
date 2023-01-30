@@ -1,16 +1,18 @@
 ---
+import ThemeIcon from "./ThemeIcon";
 ---
 
-<div
-  class="mt-4 text-center font-sans mb-6 p-4 flex flex-col items-center justify-center"
->
-  <div>
-    <a href="/" class="text-3xl">
-      <h1 class="p-2">🥛</h1>
-      <h1 class="font-semibold tracking-widest">
-        milk<span class="text-emerald-500">roll</span>
-      </h1>
-      <p class="text-xl font-light">by cade cuddy</p>
-    </a>
+<div class="pt-6 text-left font-sans mb-10 md:max-w-4xl md:mx-auto mx-4">
+  <div class="float-right mt-2 hover:cursor-pointer text-2xl">
+    <ThemeIcon client:visible />
   </div>
+  <button onclick="window.location.href = '/'">
+    <h1
+      class="text-3xl font-semibold text-black tracking-widest dark:text-neutral-300"
+    >
+      milk<span class="text-emerald-500">roll 🥛</span>
+    </h1>
+    <p class="text-2xl font-light -mt-1 text-left">cade cuddy</p>
+  </button>
+  <hr class="border-t-2 border-t-neutral-[#474056] mx-auto mt-4" />
 </div>

@@ -10,10 +10,12 @@ import { remarkReadingTime } from './remark-reading-time.mjs';
 // https://astro.build/config
 import sitemap from "@astrojs/sitemap";
 
+import preact from "@astrojs/preact"
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.cadecuddy.com',
-  integrations: [tailwind({}), mdx(), sitemap()],
+integrations: [tailwind({}), mdx(), sitemap(), preact()],
   markdown: {
     remarkPlugins: [remarkReadingTime],
     extendDefaultPlugins: true
