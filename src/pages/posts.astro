@@ -33,7 +33,9 @@ const tagCounts = blogPosts
     <div
       class="flex justify-center text-md md:text-lg items-center mt-4 space-x-3 font-mono font-bold mx-auto mb-7 max-w-sm md:max-w-lg"
     >
-      <div class="grid grid-cols-3 md:grid-cols-4 gap-4 text-left">
+      <div
+        class="grid grid-cols-3 md:grid-cols-4 gap-y-4 gap-x-10 sm:text-left text-center"
+      >
         {
           tagCounts &&
             Object.keys(tagCounts).map((tag) => (

@@ -23,3 +23,6 @@ pnpm-debug.log*
 # vscode
 .vscode/
 .vercel
+
+# s3 upload scripts
+.s3_images
