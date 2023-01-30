@@ -1,30 +1,32 @@
 ---
 import Footer from "../components/Footer.astro";
 import Head from "../components/Head.astro";
-import PostMenu from "../components/PostMenu.astro";
+import Menu from "../components/Menu.astro";
 
 const { frontmatter } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-white dark:bg-black">
   <head>
     <Head
       title={frontmatter.title + " - milk roll"}
       description={frontmatter.description}
     />
   </head>
-  <PostMenu />
-  <body>
+  <body
+    class="bg-white bg-white dark:bg-[#181A1B] text-gray-900 dark:text-neutral-300"
+  >
+    <Menu />
     <main>
-      <article class="md:max-w-3xl md:mx-auto mx-4 md:my-0 my-4">
+      <article class="md:max-w-4xl md:mx-auto mx-4 md:my-0 my-4">
         <h1 class="text-3xl md:text-5xl mb-4 md:leading-tight font-thin">
           {frontmatter.title}
         </h1>
         <img
           src={frontmatter.image}
-          height={400}
-          width={800}
+          height={1000}
+          width={1000}
           alt="Post Image"
         />
         <div class="text-sm sm:text-lg mt-2">
@@ -50,7 +52,7 @@ const { frontmatter } = Astro.props;
                 frontmatter.tags.map((tag: any) => (
                   <a
                     href={`/tags/${tag}`}
-                    class="text-black font-mono font-bold hover:decoration-emerald-500 hover:underline"
+                    class="text-black dark:text-white font-mono font-bold hover:decoration-emerald-500 hover:underline"
                   >
                     <p>#{tag}</p>
                   </a>
@@ -62,7 +64,7 @@ const { frontmatter } = Astro.props;
       </article>
       <br />
       <article
-        class="prose antialiased prose-headings:font-normal prose-h2:text-[2rem] prose-h2:leading-9 prose-headings:text-black prose-p:text-xl prose-p:leading-9 dark:prose-dark md:max-w-3xl md:mx-auto mx-4 md:my-0 my-4 prose-li:text-lg"
+        class="prose antialiased prose-headings:font-normal prose-h2:mt-12 prose-h2:text-[2rem] prose-h2:leading-4 prose-headings:text-black prose-headings:dark:text-neutral-200 prose-p:dark:text-neutral-400 prose-p:text-xl prose-p:leading-8 dark:prose-dark md:max-w-4xl md:mx-auto mx-4 md:my-0 my-4 prose-li:text-lg prose-li:dark:text-neutral-400 prose-a:text-emerald-500 prose-strong:dark:text-neutral-300"
       >
         <slot />
       </article>
