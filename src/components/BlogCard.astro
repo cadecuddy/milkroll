@@ -6,37 +6,52 @@ interface BlogCardProps {
   readTime: string;
   link: string;
   tags: string[];
+  image: string;
 }
 
-const { title, description, pubDate, readTime, link, tags } = Astro.props;
+const { title, description, pubDate, readTime, link, tags, image } =
+  Astro.props;
 ---
 
 <a
   href={link}
   rel="prefetch"
-  class="border-2 border-neutral-400 rounded-md p-4 w-[330px] md:w-[500px] transition ease-out duration-300 hover:scale-105 hover:bg-zinc-100 font-sans"
+  class="w-4/5 border border-white shadow-md dark:border-neutral-900 transition ease-out hover:scale-105 transform hover:shadow-lg duration-200"
 >
-  <h1 class="text-xl md:text-2xl font-semibold text-neutral-800">{title}</h1>
-  <h2 class="text-sm md:text-base text-neutral-500">{description}</h2>
-  <div class="flex gap-2 mt-2">
-    {
-      tags?.map((tag: any) => (
-        <p class="text-sm text-black font-mono font-bold underline decoration-emerald-500">
-          #{tag}
-        </p>
-      ))
-    }
-  </div>
-  <div class="flex space-x-6 mt-3">
-    <time datetime={pubDate} class="text-sm text-neutral-500">
-      📅 {
-        new Date(pubDate).toLocaleDateString("en-us", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })
+  <img
+    src={image}
+    alt="blog card"
+    class="w-full h-64 object-cover"
+    height="256"
+    width="512"
+  />
+  <div class="p-4">
+    <div class="flex gap-2">
+      {
+        tags?.map((tag: any) => (
+          <p class="text-sm text-black dark:text-white font-mono font-bold underline decoration-emerald-500">
+            #{tag}
+          </p>
+        ))
       }
-    </time>
-    <p class="text-sm text-neutral-500">⌚ {readTime}</p>
+    </div>
+    <h1
+      class="text-xl md:text-2xl font-semibold text-neutral-800 dark:text-neutral-300 font-sans tracking-tight"
+    >
+      {title}
+    </h1>
+    <h2 class="text-sm md:text-base text-neutral-500">{description}</h2>
+    <div class="flex space-x-6 mt-3">
+      <time datetime={pubDate} class="text-sm text-neutral-500">
+        📅 {
+          new Date(pubDate).toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+        }
+      </time>
+      <p class="text-sm text-neutral-500">⌚ {readTime}</p>
+    </div>
   </div>
 </a>

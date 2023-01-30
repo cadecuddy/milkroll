@@ -33,7 +33,7 @@ const tagCounts = blogPosts
     <div
       class="flex justify-center text-md md:text-lg items-center mt-4 space-x-3 font-mono font-bold mx-auto mb-7 max-w-sm md:max-w-lg"
     >
-      <div class="grid grid-cols-3 gap-4 text-center">
+      <div class="grid grid-cols-3 md:grid-cols-4 gap-4 text-left">
         {
           tagCounts &&
             Object.keys(tagCounts).map((tag) => (
@@ -58,6 +58,7 @@ const tagCounts = blogPosts
             pubDate={post.frontmatter.pubDate}
             readTime={post.frontmatter.minutesRead}
             link={post.url}
+            image={post.frontmatter.image}
           />
         ))
       }
