@@ -44,7 +44,7 @@ const tagCounts = blogPosts
                 class="hover:underline decoration-emerald-500
               "
               >
-                #{tag}({tagCounts[tag]})
+                {tag}({tagCounts[tag]})
               </a>
             ))
         }
@@ -61,6 +61,7 @@ const tagCounts = blogPosts
             readTime={post.frontmatter.minutesRead}
             link={post.url}
             image={post.frontmatter.image}
+            tags={post.frontmatter.tags}
           />
         ))
       }

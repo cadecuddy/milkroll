@@ -29,8 +29,8 @@ const { title, description, pubDate, readTime, link, tags, image } =
     <div class="flex gap-2">
       {
         tags?.map((tag: any) => (
-          <p class="text-sm text-black dark:text-white font-mono font-bold underline decoration-emerald-500">
-            #{tag}
+          <p class="text-xs text-black dark:text-white bg-emerald-500 p-1 rounded-lg font-mono font-bold underline decoration-emerald-500">
+            {tag}
           </p>
         ))
       }
