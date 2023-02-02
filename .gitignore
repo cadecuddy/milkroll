@@ -25,4 +25,4 @@ pnpm-debug.log*
 .vercel
 
 # s3 upload scripts
-.s3_images
+s3_images
