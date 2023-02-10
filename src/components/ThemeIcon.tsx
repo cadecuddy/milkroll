@@ -14,7 +14,7 @@ export default function ThemeToggle(): FunctionalComponent {
   }, []);
 
   if (!isMounted) {
-    return <div class="text-white">⚫</div>;
+    return <div class="text-white">[WAIT]</div>;
   }
 
   useEffect(() => {
@@ -27,8 +27,11 @@ export default function ThemeToggle(): FunctionalComponent {
   }, [theme]);
 
   return (
-    <button onClick={handleClick} class="text-black dark:text-white">
-      {theme === "light" ? "🌚" : "🌞"}
+    <button
+      onClick={handleClick}
+      class="text-black dark:text-neutral-200 hover:underline font-semibold"
+    >
+      {theme === "light" ? "[DARK]" : "[LIGHT]"}
     </button>
   );
 }

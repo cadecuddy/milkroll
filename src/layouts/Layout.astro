@@ -6,9 +6,10 @@ import Menu from "../components/Menu.astro";
 export interface Props {
   title: string;
   description: string;
+  footer: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, footer } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -17,10 +18,10 @@ const { title, description } = Astro.props;
     <Head title={title} description={description} />
   </head>
   <body
-    class="md:max-w-4xl md:mx-auto mx-4 md:my-0 my-4 bg-white dark:bg-[#181A1B] text-gray-900 dark:text-neutral-300"
+    class="max-w-3xl antialiased md:mx-auto lg:max-w-5xl xl:max-w-6xl mx-8 md:my-0 my-4 bg-neutral-100 text-gray-900"
   >
     <Menu />
     <slot />
-    <Footer />
+    {footer && <Footer />}
   </body>
 </html>
