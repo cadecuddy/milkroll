@@ -20,33 +20,28 @@ const tags = [
 <Layout
   title="milk roll"
   description="milk roll is a blog by cade cuddy. It's about software, life, and everything in-between."
+  footer={true}
 >
   <main>
-    <div class="flex flex-col justify-start items-center space-y-6">
+    <div class="flex flex-col justify-start space-y-6">
       {
-        blogPosts.map((post) => (
-          <BlogCard
-            title={post.frontmatter.title}
-            description={post.frontmatter.description}
-            pubDate={post.frontmatter.pubDate}
-            readTime={post.frontmatter.minutesRead}
-            link={post.url}
-            tags={post.frontmatter.tags}
-            image={post.frontmatter.image}
-          />
+        blogPosts.map((post, idx) => (
+          <>
+            <BlogCard
+              title={post.frontmatter.title}
+              description={post.frontmatter.description}
+              pubDate={post.frontmatter.pubDate}
+              readTime={post.frontmatter.minutesRead}
+              link={post.url}
+              tags={post.frontmatter.tags}
+              image={post.frontmatter.image}
+            />
+            {idx !== blogPosts.length - 1 && (
+              <hr class="border w-full border-t-black" />
+            )}
+          </>
         ))
       }
-    </div>
-
-    <div class="flex justify-center items-center mt-14 space-x-3 font-mono">
-      <a
-        href="/posts"
-        class="border-2 p-2 rounded-md hover:border-neutral-200 hover:text-emerald-500"
-      >
-        <span class="text-lg font-bold decoration-emerald-500">
-          view all posts →
-        </span>
-      </a>
     </div>
   </main>
 </Layout>

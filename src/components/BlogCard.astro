@@ -13,45 +13,40 @@ const { title, description, pubDate, readTime, link, tags, image } =
   Astro.props;
 ---
 
-<a
-  href={link}
-  rel="prefetch"
-  class="w-4/5 border border-white shadow-md dark:border-neutral-900 transition ease-out hover:scale-105 transform hover:shadow-lg duration-200"
->
-  <img
-    src={image}
-    alt="blog card"
-    class="w-full h-64 object-cover"
-    height="256"
-    width="512"
-  />
-  <div class="p-4">
-    <div class="flex gap-2">
+<div class="w-11/12 lg:w-full">
+  <div
+    class="text-3xl xl:text-7xl lg:text-6xl md:text-5xl sm:text-4xl font-bold"
+  >
+    <a href={link} class="hover:underline leading-tight">{title}</a>
+  </div>
+  <div
+    class="text-sm xl:text-lg lg:text-base md:text-base sm:text-base text-neutral-800"
+  >
+    <span>
       {
-        tags?.map((tag: any) => (
-          <p class="text-xs text-black dark:text-white bg-emerald-500 p-1 rounded-lg font-mono font-bold underline decoration-emerald-500">
-            {tag}
+        new Date(pubDate).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })
+      }
+    </span>
+    <span>•</span>
+    <span>{readTime}</span>
+
+    <div class="float-right flex gap-2">
+      {
+        tags.map((tag: any) => (
+          <p>
+            <a
+              href={`/tags/${tag}`}
+              class="text-sm xl:text-lg lg:text-base md:text-base text-neutral-800 sm:text-base underline"
+            >
+              {tag}
+            </a>
           </p>
         ))
       }
     </div>
-    <h1
-      class="text-xl md:text-2xl font-semibold text-neutral-800 dark:text-neutral-300 font-sans tracking-tight"
-    >
-      {title}
-    </h1>
-    <h2 class="text-sm md:text-base text-neutral-500">{description}</h2>
-    <div class="flex space-x-6 mt-3">
-      <time datetime={pubDate} class="text-sm text-neutral-500">
-        📅 {
-          new Date(pubDate).toLocaleDateString("en-us", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })
-        }
-      </time>
-      <p class="text-sm text-neutral-500">⌚ {readTime}</p>
-    </div>
   </div>
-</a>
+</div>

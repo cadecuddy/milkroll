@@ -2,17 +2,27 @@
 import ThemeIcon from "./ThemeIcon";
 ---
 
-<div class="pt-6 text-left font-sans mb-10 md:max-w-4xl md:mx-auto mx-4">
-  <div class="float-right mt-2 hover:cursor-pointer text-2xl">
-    <ThemeIcon client:visible />
+<div
+  class="pt-10 text-left font-sans mb-10 md:max-w-3xl antialiased md:mx-auto max-w-3xl lg:max-w-5xl xl:max-w-6xl"
+>
+  <div class="container mx-auto flex justify-between items-center">
+    <button onclick="window.location.href = '/'">
+      <div class="hover:underline">
+        <h1 class="font-bold text-xl">MILK</h1>
+        <h1 class="font-bold text-xl ml-1">ROLL</h1>
+      </div>
+    </button>
+    <nav class="font-semibold text-lg">
+      <ul class="flex">
+        <li class="mr-4">
+          <button
+            onclick="window.location.href = '/about'"
+            class="hover:cursor-pointer hover:underline"
+          >
+            ABOUT
+          </button>
+        </li>
+      </ul>
+    </nav>
   </div>
-  <button onclick="window.location.href = '/'">
-    <h1
-      class="text-3xl font-semibold text-black tracking-widest dark:text-neutral-300"
-    >
-      milk<span class="text-emerald-500">roll 🥛</span>
-    </h1>
-    <p class="text-2xl font-light -mt-1 text-left">cade cuddy</p>
-  </button>
-  <hr class="border-t-2 border-t-neutral-[#474056] mx-auto mt-4" />
 </div>

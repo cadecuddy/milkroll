@@ -24,39 +24,51 @@ const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
-<Layout title={`milk roll | #${tag}`} description={`Posts tagged with ${tag}`}>
+<Layout
+  title={`milk roll | #${tag}`}
+  description={`Posts tagged with ${tag}`}
+  footer={true}
+>
   <main>
-    <div class="text-center">
-      <h1 class="text-2xl font-thin mb-4">
-        Posts tagged with <span class="font-bold text-emerald-500">{tag}</span>
+    <div class="text-center text-xl md:text-3xl">
+      <h1 class="font-thin mb-4">
+        Posts tagged with <span class="font-bold text-neutral-800">{tag}</span>
       </h1>
       <h2 class="mb-8">
-        <a href="/posts" class="text-emerald-500 hover:text-emerald-600">
-          &larr; All posts
-        </a>
+        <a href="/" class="text-black hover:text-neutral-700">
+          &larr; All posts</a
+        >
       </h2>
     </div>
     <div class="flex flex-col justify-center items-center space-y-6">
       {
         posts.map(
-          (post: {
-            frontmatter: {
-              minutesRead: any;
-              title: any;
-              description: any;
-              pubDate: any;
-            };
-            url: any;
-          }) => (
-            <BlogCard
-              title={post.frontmatter.title}
-              description={post.frontmatter.description}
-              pubDate={post.frontmatter.pubDate}
-              readTime={post.frontmatter.minutesRead}
-              link={post.url}
-              image={post.frontmatter.image}
-              tags={post.frontmatter.tags}
-            />
+          (
+            post: {
+              frontmatter: {
+                minutesRead: any;
+                title: any;
+                description: any;
+                pubDate: any;
+              };
+              url: any;
+            },
+            idx: number
+          ) => (
+            <>
+              <BlogCard
+                title={post.frontmatter.title}
+                description={post.frontmatter.description}
+                pubDate={post.frontmatter.pubDate}
+                readTime={post.frontmatter.minutesRead}
+                link={post.url}
+                image={post.frontmatter.image}
+                tags={post.frontmatter.tags}
+              />
+              {idx !== posts.length - 1 && (
+                <hr class="border w-full border-t-black" />
+              )}
+            </>
           )
         )
       }

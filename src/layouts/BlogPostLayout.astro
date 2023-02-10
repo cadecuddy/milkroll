@@ -2,71 +2,74 @@
 import Footer from "../components/Footer.astro";
 import Head from "../components/Head.astro";
 import Menu from "../components/Menu.astro";
+import Comments from "../components/Comments.svelte";
 
 const { frontmatter } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="bg-white dark:bg-black">
+<html lang="en">
   <head>
     <Head
       title={frontmatter.title + " - milk roll"}
       description={frontmatter.description}
+      image={frontmatter.image}
     />
   </head>
-  <body class="bg-white dark:bg-[#181A1B] text-gray-900 dark:text-neutral-300">
+  <body class="bg-neutral-100 text-gray-900">
     <Menu />
     <main>
-      <article class="md:max-w-4xl md:mx-auto mx-4 md:my-0 my-4">
-        <h1 class="text-3xl md:text-5xl mb-4 md:leading-tight font-thin">
-          {frontmatter.title}
-        </h1>
+      <article
+        class="md:max-w-3xl antialiased md:mx-auto max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-4 md:my-0 my-4"
+      >
         <img
           src={frontmatter.image}
-          height={1000}
-          width={1000}
+          height={1200}
+          width={1200}
           alt="Post Image"
         />
-        <div class="text-sm sm:text-lg mt-2">
-          <p class="text-neutral-500 text-base">
-            <div class="flex space-x-3">
-              {
-                frontmatter.tags.map((tag: any) => (
-                  <a
-                    href={`/tags/${tag}`}
-                    class="text-sm text-black dark:text-white bg-emerald-500 px-2 py-1 rounded-lg font-mono font-bold hover:decoration-emerald-500 hover:text-white hover:dark:text-black"
-                  >
-                    <p>{tag}</p>
-                  </a>
-                ))
-              }
-            </div>
-          </p>
-          <time
-            datetime={frontmatter.pubDate}
-            class="text-neutral-500 font-mono"
-          >
-            Published:
+        <h1
+          class="md:leading-tight mt-12 text-3xl lg:text-6xl md:text-5xl sm:text-4xl font-bold"
+        >
+          {frontmatter.title}
+        </h1>
+        <div class="text-sm sm:text-lg my-8">
+          <time datetime={frontmatter.pubDate}>
+            published
             {
               new Date(frontmatter.pubDate).toLocaleDateString("en-us", {
                 year: "numeric",
                 month: "short",
                 day: "numeric",
               })
-            }
-            <span class="float-right">
-              {frontmatter.minutesRead} 📚
-            </span>
+            } by <span class="font-bold">cade</span>
           </time>
+          <ul class="flex">
+            {
+              frontmatter.tags.map((tag: any, idx: number) => (
+                <li class={idx === 0 ? "" : "ml-2"}>
+                  <a
+                    href={`/tags/${tag}`}
+                    class="text-sm sm:text-lg text-neutral-700 hover:text-gray-900 underline"
+                  >
+                    {tag}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
+        <br />
+        <article
+          class="prose antialiased prose-headings:font-bold prose-h2:mt-12 prose-h2:text-3xl prose-h2:leading-4 prose-headings:text-neutral-800 prose-p:text-xl prose-p:leading-8 prose-p:text-neutral-800 md:max-w-3xl md:mx-auto max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-4 md:my-0 my-4 prose-li:text-lg prose-a:text-black-500"
+        >
+          <slot />
+        </article>
+        <div class="mt-10">
+          <Comments client:load />
+        </div>
+        <Footer />
       </article>
-      <br />
-      <article
-        class="prose antialiased prose-headings:font-normal prose-h2:mt-12 prose-h2:text-[2rem] prose-h2:leading-4 prose-headings:text-black prose-headings:dark:text-neutral-200 prose-p:dark:text-neutral-400 prose-p:text-xl prose-p:leading-8 dark:prose-dark md:max-w-4xl md:mx-auto mx-4 md:my-0 my-4 prose-li:text-lg prose-li:dark:text-neutral-400 prose-a:text-emerald-500 prose-strong:dark:text-neutral-300"
-      >
-        <slot />
-      </article>
-      <Footer />
     </main>
   </body>
 </html>
