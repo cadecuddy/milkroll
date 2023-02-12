@@ -9,7 +9,6 @@ import { remarkReadingTime } from './remark-reading-time.mjs';
 
 // https://astro.build/config
 import sitemap from "@astrojs/sitemap";
-import preact from "@astrojs/preact";
 
 // https://astro.build/config
 import svelte from "@astrojs/svelte";
@@ -17,7 +16,7 @@ import svelte from "@astrojs/svelte";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.cadecuddy.com',
-  integrations: [tailwind({}), mdx(), sitemap(), preact(), svelte()],
+  integrations: [tailwind({}), mdx(), sitemap(), svelte()],
   markdown: {
     remarkPlugins: [remarkReadingTime],
     extendDefaultPlugins: true
